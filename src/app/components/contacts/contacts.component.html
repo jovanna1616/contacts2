@@ -1,0 +1,81 @@
+<h1>Contacts</h1>
+
+<form #contactForm="ngForm" (ngSubmit)="addContact(newContact); contactForm.reset()"> <!-- angularov objekat a ne forma -->
+  <div class="form-group">
+    <label>First Name</label>
+    <input #firstName="ngModel" [(ngModel)]="newContact.firstName" type="text" name="firstName" class="form-control" required minlength="2">
+  </div>
+  <div class="alert alert-danger" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+    <div *ngIf="firstName.errors.required">
+      First name is required.
+    </div>
+    <div *ngIf="firstName.errors.minlength">
+      First name must be at least 2 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Last Name</label>
+    <input #lastName="ngModel" [(ngModel)]="newContact.lastName" type="text" name="lastName" class="form-control" required minlength="2">
+  </div>
+  <div class="alert alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+    <div *ngIf="lastName.errors.required">
+      Last name is required.
+    </div>
+    <div *ngIf="lastName.errors.minlength">
+      Last name must be at least 2 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input #email="ngModel" [(ngModel)]="newContact.email" type="email" name="email" class="form-control" required email>
+  </div>
+  <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+    <div *ngIf="email.errors.required">
+      Email is required.
+    </div>
+    <div *ngIf="email.errors.email">
+      Email invalid.
+    </div>
+  </div>
+
+  <div class="input-group col-md-5 pl-0 my-lg-4 my-2">
+    <button type="submit" 
+      class="btn btn-primary" 
+      (click)="addContact(newContact); contactForm.reset()" [disabled]="!contactForm.valid">Add contact
+    </button>
+  </div>
+</form>
+
+
+
+
+
+
+<div class="input-group col-md-5 pl-0 my-lg-4 my-2">
+  <span class="input-group-addon">Filter by name</span>
+  <input [(ngModel)]="filter" type="text" class="form-control">
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td class="align-middle">
+        <a [routerLink]="['/contacts', contact.id]">
+          {{ contact.firstName }} {{ contact.lastName }}
+        </a>
+      </td>
+      <td class="align-middle">{{ contact.email | uppercase | lowercase }}</td>
+      <td><button class="btn btn-danger btn-sm" (click)="remove(contact)">Remove</button></td>
+    </tr>
+</table>
+
+<router-outlet></router-outlet>
