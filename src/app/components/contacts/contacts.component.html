@@ -18,6 +18,8 @@
   <tbody>
     <tr *ngFor="let contact of contacts"
       [contactRow]="contact"
+      (onEdit)="contactForm.edit($event)"
+      (onRemove)="remove(contact)"
       >
     </tr>
 </table>

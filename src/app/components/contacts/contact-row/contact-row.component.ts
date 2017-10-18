@@ -8,14 +8,21 @@ import { Contact } from '../../../shared/models/contact.model';
 })
 export class ContactRowComponent implements OnInit {
 
-	@Input()
-	contactRow: Contact;
+	@Input() contactRow: Contact;
+
+	@Output() onEdit = new EventEmitter<Contact>();
+	@Output() onRemove = new EventEmitter<Contact>();
+
 
 	edit(contact: Contact) {
+
+		this.onEdit.emit(contact);
 
 	}
 
 	remove(contact: Contact) {
+		
+		this.onRemove.emit(contact);
 
 	}
 
