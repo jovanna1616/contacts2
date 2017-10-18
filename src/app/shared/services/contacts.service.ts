@@ -11,14 +11,26 @@ export class ContactsService {
   	return this.http.get<any[]>('http://localhost:8000/contacts.php');
   }
 
-  public addContact(firstName, lastName, email)
+  public addContact(contact)
   {
 	  return this.http.post(
 		  'http://localhost:8000/contacts-add.php',
 		  {
-			  firstName: firstName,
-			  lastName: lastName,
-			  email: email
+	  		id: contact.id,
+			  firstName: contact.firstName,
+			  lastName: contact.lastName,
+			  email: contact.email
+		  }
+	  	);
+  }
+
+  public editContact(contact) {
+	  return this.http.put('http://localhost:8000/contact-edit.php', 
+		  {
+			  id: contact.id,
+			  firstName: contact.firstName,
+			  lastName: contact.lastName,
+			  email: contact.email
 		  }
 	  	);
   }

@@ -9,6 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContactDetailsComponent } from './components/contacts/contact-details/contact-details.component';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+import { ContactFormComponent } from './components/contacts/contact-form/contact-form.component';
+import { ContactRowComponent } from './components/contacts/contact-row/contact-row.component';
+
 
 @NgModule({
   declarations: [
@@ -17,12 +21,15 @@ import { FormsModule } from '@angular/forms';
     LayoutComponent,
     MessagesComponent,
     ContactDetailsComponent,
+    ContactFormComponent,
+    ContactRowComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    CustomFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
