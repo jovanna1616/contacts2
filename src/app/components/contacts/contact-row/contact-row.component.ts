@@ -8,7 +8,11 @@ import { Contact } from '../../../shared/models/contact.model';
 })
 export class ContactRowComponent implements OnInit {
 
-	@Input() contactRow: Contact;
+	private contact: Contact;
+
+	@Input() set contactRow(contactFromInput: Contact) {
+		this.contact = contactFromInput;
+	}
 
 	@Output() onEdit = new EventEmitter<Contact>();
 	@Output() onRemove = new EventEmitter<Contact>();
@@ -21,7 +25,7 @@ export class ContactRowComponent implements OnInit {
 	}
 
 	remove(contact: Contact) {
-		
+
 		this.onRemove.emit(contact);
 
 	}
