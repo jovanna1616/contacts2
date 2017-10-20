@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts.service';
+import { PageTitleService } from '../../../shared/services/page-title.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -10,8 +11,11 @@ export class ContactDetailsComponent implements OnInit {
   
   private contact: any;
 
-  constructor(private route: ActivatedRoute,
-              private contactService: ContactsService) {
+  constructor(
+    private route: ActivatedRoute,
+    private contactService: ContactsService,
+    private pageTitleService: PageTitleService
+    ) {
   }
 
   ngOnInit() {
@@ -22,6 +26,10 @@ export class ContactDetailsComponent implements OnInit {
       this.contactService.getContacts()
         .subscribe((data: any[]) => {
           this.contact = data.find(item => item['id'] == id);
+
+          this.pageTitleService.setTitle(
+            "Contact details - " + this.contact.firstName
+          );
         });
     });
   }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { Observable, Observer } from 'rxjs';
+import { Contact } from '../models/contact.model';
 
 @Injectable()
 export class ContactsService {
@@ -33,6 +35,15 @@ export class ContactsService {
 			  email: contact.email
 		  }
 	  	);
+  }
+
+  public removeContact(contact: Contact) {
+		return new Observable((o: Observer<any>) => {
+			setTimeout(() => {
+				o.next(contact); // next - propusta dalje contact onome ko se subscribe na contact
+			}, 2000);
+		});
+
   }
 
 }

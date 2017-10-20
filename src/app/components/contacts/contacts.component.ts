@@ -47,21 +47,23 @@ export class ContactsComponent {
 
     } else {
         this.contactService.addContact
-          (
-          contact
-          ).subscribe
-          (
-          contact => {
-            this.contacts.push(contact);
-          }
+          (contact).subscribe(
+            contact => {
+              this.contacts.push(contact);
+            }
           );
       }
   }
 
 
   remove(contact) {
-    const index = this.contacts.indexOf(contact);
-    this.contacts.splice(index, 1);
+    this.contactService.removeContact(contact)
+      .subscribe(
+        (contact: Contact) => {
+          const index = this.contacts.indexOf(contact);
+          this.contacts.splice(index, 1);
+        }
+      );
   }
 
 }
